@@ -6,6 +6,10 @@ import Background3D from "@/components/graphics/Background3D";
 import TargetCursor from '@/components/graphics/Cursor';
 import { PortfolioProvider } from "@/context/PortfolioContext";
 import ModeToggle from "@/components/ModeToggle";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -18,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased scroll-smooth">
+    <html lang="en" className={cn("h-full antialiased scroll-smooth", "font-sans", geist.variable)}>
       <body className="min-h-full flex flex-col">
         <PortfolioProvider>
           <TargetCursor 

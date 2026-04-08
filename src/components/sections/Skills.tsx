@@ -25,19 +25,19 @@ const ProSkills = [
 const personalInterests = [
   {
     category: "Creative Arts",
-    items: ["Street Photography", "Analog Film", "Cinematography", "Photo Editing"],
+    items: ["Street Photography","Cinematography", "Photo Editing"],
   },
   {
     category: "Maker Hobbies",
-    items: ["3D Printing", "Custom Keyboards", "Drone Building", "Soldering"],
+    items: ["3D Printing", "Soldering"],
   },
   {
     category: "Strategy & Gaming",
-    items: ["Real-time Strategy", "Global History", "Chess", "Geopolitics"],
+    items: ["Global History", "Geopolitics","Video Games"],
   },
   {
     category: "Life & Health",
-    items: ["Strength Training", "Swimming", "Calisthenics", "Cooking"],
+    items: ["Strength Training", "Cooking"],
   },
 ];
 

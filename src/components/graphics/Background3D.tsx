@@ -1,5 +1,4 @@
 "use client";
-
 import { usePortfolio } from '@/context/PortfolioContext';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
 import { useEffect, useRef, useMemo } from 'react';
@@ -196,11 +195,11 @@ export default function LineWaves({
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
-    
+
     // Check if canvas already exists to prevent duplication
     let canvas = container.querySelector('canvas');
     if (canvas) {
-        container.removeChild(canvas);
+      container.removeChild(canvas);
     }
 
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
@@ -302,7 +301,7 @@ export default function LineWaves({
 
   return (
     <div ref={containerRef} className="line-waves-container">
-      <motion.div 
+      <motion.div
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           backdropFilter: useTransform(blurValue, (v) => `blur(${v}px)`),
