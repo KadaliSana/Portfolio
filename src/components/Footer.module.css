@@ -1,0 +1,30 @@
+@reference "../app/globals.css";
+
+.footer {
+  @apply bg-transparent text-slate-500 py-10 relative z-10 border-t border-white/5;
+}
+
+.container {
+  @apply max-w-6xl mx-auto px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4;
+}
+
+.text {
+  @apply text-sm;
+}
+
+.linksContainer {
+  @apply flex items-center gap-6;
+}
+
+.link {
+  @apply hover:text-indigo-400 transition-colors text-sm;
+}
+
+.socialLink {
+  @apply text-slate-400 hover:text-indigo-400 transition-colors flex items-center gap-2 text-sm font-medium;
+}
+
+
+.socialIcon {
+  @apply w-5 h-5 shrink-0;
+}

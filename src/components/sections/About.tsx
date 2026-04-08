@@ -1,63 +1,98 @@
+"use client";
+
+import { usePortfolio } from "@/context/PortfolioContext";
+import styles from "./About.module.css";
+import { Camera, Music, Gamepad2 } from "lucide-react";
+
 export default function About() {
+  const { mode } = usePortfolio();
+
+  const content = {
+    Pro: {
+      badge: "About Me",
+      title: "Passionate developer building things for the web",
+      paragraphs: [
+        "I am a B.Tech Computer Science and Engineering (Information Security) student at Vellore Institute of Technology, graduating in 2027. My passion lies in Robotics, AI, and Autonomous Systems.",
+        "As the Vice Captain and former Autonomous Systems Lead for RoverX, I've engineered cutting-edge autonomous navigation stacks and led technical development for international competitions. I also consult as a freelance robotics developer, focusing on computer vision and RTAB-Map SLAM.",
+        "In my spare time, I explore large language models, build embedded operating systems from scratch, and architect real-time risk prediction engines."
+      ],
+      stats: [
+        { value: "2nd", label: "Rover Design Challenge" },
+        { value: "1", label: "Patent Application" },
+        { value: "Best", label: "Autonomous Mission" }
+      ]
+    },
+    personal: {
+      badge: "The Human Element",
+      title: "Exploring more than just lines of code",
+      paragraphs: [
+        "When I'm not in front of a terminal, I'm usually exploring the physical world. I have a deep fascination with how things work, which led me into the world of DIY electronics and mechanical tinkering.",
+        "I'm also an avid photographer, capture-ing moments that blend technology and nature. I believe that creativity in code is fueled by diverse experiences outside of it.",
+        "Gaming and music are my go-to's for a quick reset. I love strategy games that challenge my logic and finding new rhythms that inspire my focus."
+      ],
+      stats: [
+        { value: "50+", label: "Cities Explored", icon: <Camera size={14} /> },
+        { value: "∞", label: "Curiosity Level", icon: <Music size={14} /> },
+        { value: "12", label: "Personal Projects", icon: <Gamepad2 size={14} /> }
+      ]
+    }
+  }[mode];
+
   return (
-    <section id="about" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center gap-16">
+    <section id="about" className={styles.aboutSection}>
+      <div className={styles.container}>
+        <div className={styles.contentLayout}>
           {/* Photo placeholder */}
-          <div className="flex-shrink-0">
-            <div className="w-64 h-64 rounded-2xl bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center shadow-xl">
-              <svg
-                className="w-32 h-32 text-indigo-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1}
-                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
+          <div className={styles.photoContainer}>
+            <div className={styles.photoWrap}>
+              {mode === "Pro" ? (
+                <svg
+                  className={styles.photoIcon}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1}
+                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              ) : (
+                <div className="text-white opacity-20 flex flex-col items-center">
+                   <User className="w-20 h-20" />
+                </div>
+              )}
             </div>
           </div>
 
           {/* Bio */}
-          <div className="flex-1">
-            <span className="inline-block text-indigo-600 font-semibold uppercase tracking-widest text-sm mb-4">
-              About Me
+          <div className={styles.bioContainer}>
+            <span className={styles.badge}>
+              {content.badge}
             </span>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Passionate developer building things for the web
+            <h2 className={styles.title}>
+              {content.title}
             </h2>
-            <p className="text-gray-500 text-lg mb-4 leading-relaxed">
-              I&apos;m a full-stack developer with a passion for building
-              beautiful, accessible, and high-performance web applications.
-              With expertise in React, Next.js, Node.js, and cloud
-              technologies, I love turning complex problems into elegant
-              solutions.
-            </p>
-            <p className="text-gray-500 text-lg mb-8 leading-relaxed">
-              When I&apos;m not coding, you can find me contributing to
-              open-source projects, writing technical blog posts, or exploring
-              the latest developments in web technology.
-            </p>
+            {content.paragraphs.map((p, i) => (
+              <p key={i} className={i === content.paragraphs.length - 1 ? styles.paragraphLast : styles.paragraph}>
+                {p}
+              </p>
+            ))}
 
-            <div className="flex flex-wrap gap-4">
-              <div className="text-center">
-                <p className="text-3xl font-bold text-indigo-600">3+</p>
-                <p className="text-gray-500 text-sm">Years Experience</p>
-              </div>
-              <div className="w-px bg-gray-200" />
-              <div className="text-center">
-                <p className="text-3xl font-bold text-indigo-600">20+</p>
-                <p className="text-gray-500 text-sm">Projects Completed</p>
-              </div>
-              <div className="w-px bg-gray-200" />
-              <div className="text-center">
-                <p className="text-3xl font-bold text-indigo-600">10+</p>
-                <p className="text-gray-500 text-sm">Happy Clients</p>
-              </div>
+            <div className={styles.statsContainer}>
+              {content.stats.map((stat, i) => (
+                <div key={i} className="flex items-center">
+                  <div className={styles.statItem}>
+                    <p className={styles.statValue}>
+                      {stat.value}
+                    </p>
+                    <p className={styles.statLabel}>{stat.label}</p>
+                  </div>
+                  {i < content.stats.length - 1 && <div className={styles.divider} />}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -65,3 +100,5 @@ export default function About() {
     </section>
   );
 }
+
+import { User } from "lucide-react";

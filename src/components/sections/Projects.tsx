@@ -1,98 +1,106 @@
-const projects = [
+"use client";
+
+import { usePortfolio } from "@/context/PortfolioContext";
+import styles from "./Projects.module.css";
+
+const ProProjects = [
   {
-    title: "E-Commerce Platform",
+    title: "Shield",
     description:
-      "A full-stack e-commerce application built with Next.js, Stripe payments, and a PostgreSQL database. Features include product search, cart management, and order tracking.",
-    tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-    liveUrl: "#",
-    githubUrl: "#",
-    emoji: "🛒",
+      "Intrusion Detection System utilizing Zeek for real-time traffic monitoring. Implemented an AI suite featuring Transformers, Random/Isolation Forests, and a risk scoring engine.",
+    tags: ["Python", "PyTorch", "Networking", "Transformers", "Sklearn"],
+    liveUrl: "https://github.com/KadaliSana/Sheild",
+    githubUrl: "https://github.com/KadaliSana/Sheild",
   },
   {
-    title: "Task Management App",
+    title: "CleanID",
     description:
-      "A collaborative task management tool with real-time updates using WebSockets. Supports drag-and-drop boards, labels, and team assignments.",
-    tags: ["React", "Node.js", "WebSockets", "MongoDB"],
-    liveUrl: "#",
-    githubUrl: "#",
-    emoji: "✅",
+      "Locally hosted PII detector utilizing YOLO-World for object detection, Regex, and Moondream VLM for context. Integrated with Langchain and Gemini for real-time redaction.",
+    tags: ["YOLO", "OpenCV", "Langchain", "Python"],
+    liveUrl: "https://github.com/KadaliSana/CleanID",
+    githubUrl: "https://github.com/KadaliSana/CleanID",
   },
   {
-    title: "AI Chat Interface",
+    title: "CrowdSentinel",
     description:
-      "A modern chat interface powered by OpenAI's API. Features markdown rendering, conversation history, and customizable system prompts.",
-    tags: ["Next.js", "OpenAI", "Tailwind CSS", "Vercel"],
-    liveUrl: "#",
-    githubUrl: "#",
-    emoji: "🤖",
+      "IoT-based crowd stampede risk prediction. Streamed real-time video to AWS KVS, using YOLO and LSTM risk engines, paired with a live tracking dashboard and SSE push alerts.",
+    tags: ["AWS KVS", "IoT", "Flask", "YOLO", "LSTM"],
+    liveUrl: "https://github.com/KadaliSana/CrowdSentinel",
+    githubUrl: "https://github.com/KadaliSana/CrowdSentinel",
   },
   {
-    title: "Developer Blog",
+    title: "SaleriOS",
     description:
-      "A high-performance blog built with Next.js and MDX. Features syntax highlighting, reading time estimation, and an RSS feed.",
-    tags: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
+      "Engineered an RTOS based on microkernel architecture for Raspberry Pi 4 using QEMU. Implemented custom C stdlib, boot mechanism, and TTY console.",
+    tags: ["C", "ARM", "Assembly", "Raspberry Pi"],
+    liveUrl: "https://github.com/KadaliSana/SaleriOS",
+    githubUrl: "https://github.com/KadaliSana/SaleriOS",
+  }
+];
+
+const personalProjects = [
+  {
+    title: "Custom Ortho Keyboard",
+    description:
+      "Designed and hand-wired a 40% ortholinear mechanical keyboard. Flashed custom QMK firmware and implemented custom recursive layer logic.",
+    tags: ["Hardware", "Firmware", "QMK", "Electronics"],
     liveUrl: "#",
     githubUrl: "#",
-    emoji: "📝",
   },
   {
-    title: "Weather Dashboard",
+    title: "Street Frames",
     description:
-      "A beautiful weather dashboard with 7-day forecasts, interactive maps, and location search powered by the OpenWeatherMap API.",
-    tags: ["React", "OpenWeatherMap API", "Chart.js"],
+      "A personal digital gallery of urban street photography. Experimented with high-contrast monochrome styles and negative space compositions.",
+    tags: ["Photography", "Art", "Design"],
     liveUrl: "#",
     githubUrl: "#",
-    emoji: "🌤️",
   },
   {
-    title: "Portfolio Website",
+    title: "HomeGrid IoT",
     description:
-      "This very portfolio website! A responsive, accessible, and performant website built with Next.js and Tailwind CSS.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+      "A lightweight home automation server running on a Raspberry Pi Zero to monitor plant soil moisture and automate desk lighting using MQTT.",
+    tags: ["IoT", "Raspberry Pi", "MQTT", "Python"],
     liveUrl: "#",
     githubUrl: "#",
-    emoji: "🎯",
-  },
+  }
 ];
 
 export default function Projects() {
+  const { mode } = usePortfolio();
+  const currentProjects = mode === "Pro" ? ProProjects : personalProjects;
+
   return (
-    <section id="projects" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="inline-block text-indigo-600 font-semibold uppercase tracking-widest text-sm mb-4">
-            Projects
+    <section id="projects" className={styles.projectsSection}>
+      <div className={styles.container}>
+        <div className={styles.headerWrap}>
+          <span className={styles.badge}>
+            {mode === "Pro" ? "Projects" : "Personal Work"}
           </span>
-          <h2 className="text-4xl font-bold text-gray-900">
-            Things I&apos;ve Built
+          <h2 className={styles.title}>
+            {mode === "Pro" ? "Things I've Built" : "Ideas & Experiments"}
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
+        <div className={styles.grid}>
+          {currentProjects.map((project) => (
             <div
               key={project.title}
-              className="group bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:border-indigo-100 transition-all flex flex-col"
+              className={`group ${styles.card}`}
             >
-              {/* Project icon */}
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-2xl mb-4">
-                {project.emoji}
-              </div>
-
-              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">
+              <h3 className={styles.projectTitle}>
                 {project.title}
               </h3>
 
-              <p className="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+              <p className={styles.projectDesc}>
                 {project.description}
               </p>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-5">
+              <div className={styles.tagsContainer}>
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-medium bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full"
+                    className={styles.tag}
                   >
                     {tag}
                   </span>
@@ -100,22 +108,22 @@ export default function Projects() {
               </div>
 
               {/* Links */}
-              <div className="flex items-center gap-4">
+              <div className={styles.linksContainer}>
                 <a
                   href={project.liveUrl}
-                  className="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 transition-colors"
+                  className={`${styles.demoLink} cursor-target`}
                 >
-                  Live Demo
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {mode === "Pro" ? "Live Demo" : "View Story"}
+                  <svg className={styles.icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </a>
                 <a
                   href={project.githubUrl}
-                  className="text-sm font-semibold text-gray-600 hover:text-gray-900 flex items-center gap-1 transition-colors"
+                  className={`${styles.githubLink} cursor-target`}
                 >
                   GitHub
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className={styles.icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                 </a>

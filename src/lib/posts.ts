@@ -188,10 +188,10 @@ An estimated 1 billion people worldwide live with some form of disability. Build
 Before reaching for ARIA, use semantic HTML. Browsers expose semantics to assistive technologies for free:
 
 \`\`\`html
-<!-- ❌ Bad -->
+<!-- Bad -->
 <div class="button" onclick="...">Click me</div>
 
-<!-- ✅ Good -->
+<!-- Good -->
 <button type="button" onClick={...}>Click me</button>
 \`\`\`
 

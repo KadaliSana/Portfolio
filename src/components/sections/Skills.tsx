@@ -1,53 +1,76 @@
-const skills = [
+"use client";
+
+import { usePortfolio } from "@/context/PortfolioContext";
+import styles from "./Skills.module.css";
+
+const ProSkills = [
   {
-    category: "Frontend",
-    icon: "🎨",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
+    category: "AI & Machine Learning",
+    items: ["PyTorch", "Transformers", "YOLO", "SciKit-Learn", "OpenCV"],
   },
   {
-    category: "Backend",
-    icon: "⚙️",
-    items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "REST APIs"],
+    category: "Robotics & Systems",
+    items: ["ROS2", "RTAB-Map (SLAM)", "Embedded C", "ARM Assembly", "IoT"],
   },
   {
-    category: "DevOps & Tools",
-    icon: "🛠️",
-    items: ["Git", "Docker", "AWS", "Vercel", "GitHub Actions"],
+    category: "Backend & Cloud",
+    items: ["Python", "Flask", "AWS Kinesis", "Zeek (Networking)", "PostgreSQL"],
   },
   {
-    category: "Design",
-    icon: "✏️",
-    items: ["Figma", "Responsive Design", "Accessibility", "UI/UX Principles"],
+    category: "Tools & Architectures",
+    items: ["Git", "Linux", "Microkernels", "DeepFace", "Langchain"],
   },
 ];
 
+const personalInterests = [
+  {
+    category: "Creative Arts",
+    items: ["Street Photography", "Analog Film", "Cinematography", "Photo Editing"],
+  },
+  {
+    category: "Maker Hobbies",
+    items: ["3D Printing", "Custom Keyboards", "Drone Building", "Soldering"],
+  },
+  {
+    category: "Strategy & Gaming",
+    items: ["Real-time Strategy", "Global History", "Chess", "Geopolitics"],
+  },
+  {
+    category: "Life & Health",
+    items: ["Strength Training", "Swimming", "Calisthenics", "Cooking"],
+  },
+];
+
+
 export default function Skills() {
+  const { mode } = usePortfolio();
+  const currentSkills = mode === "Pro" ? ProSkills : personalInterests;
+
   return (
-    <section id="skills" className="py-24 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="inline-block text-indigo-600 font-semibold uppercase tracking-widest text-sm mb-4">
-            Skills
+    <section id="skills" className={styles.skillsSection}>
+      <div className={styles.container}>
+        <div className={styles.headerWrap}>
+          <span className={styles.badge}>
+            {mode === "Pro" ? "Skills" : "Interests"}
           </span>
-          <h2 className="text-4xl font-bold text-gray-900">
-            Technologies I Work With
+          <h2 className={styles.title}>
+            {mode === "Pro" ? "Technologies I Work With" : "Things I'm Passionate About"}
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skills.map((skill) => (
+        <div className={styles.grid}>
+          {currentSkills.map((skill) => (
             <div
               key={skill.category}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-indigo-100 transition-all"
+              className={styles.card}
             >
-              <div className="text-3xl mb-4">{skill.icon}</div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
+              <h3 className={styles.categoryTitle}>
                 {skill.category}
               </h3>
-              <ul className="space-y-2">
+              <ul className={styles.list}>
                 {skill.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-gray-600 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
+                  <li key={item} className={styles.listItem}>
+                    <span className={styles.listBullet} />
                     {item}
                   </li>
                 ))}
