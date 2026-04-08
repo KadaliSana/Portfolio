@@ -10,11 +10,11 @@ const ProSkills = [
   },
   {
     category: "Robotics & Systems",
-    items: ["ROS2", "RTAB-Map (SLAM)", "Embedded C", "ARM Assembly", "IoT"],
+    items: ["ROS2", "SLAM", "Embedded C", "ARM Assembly", "IoT"],
   },
   {
     category: "Backend & Cloud",
-    items: ["Python", "Flask", "AWS Kinesis", "Zeek (Networking)", "PostgreSQL"],
+    items: ["Python", "Flask", "AWS", "Zeek (Networking)", "PostgreSQL"],
   },
   {
     category: "Tools & Architectures",

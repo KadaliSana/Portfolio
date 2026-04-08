@@ -42,7 +42,6 @@ export default function About() {
     <section id="about" className={styles.aboutSection}>
       <div className={styles.container}>
         <div className={styles.contentLayout}>
-          {/* Photo placeholder */}
           <div className={styles.photoContainer}>
             <div className={styles.photoWrap}>
               {mode === "Pro" ? (
@@ -67,7 +66,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Bio */}
           <div className={styles.bioContainer}>
             <span className={styles.badge}>
               {content.badge}
