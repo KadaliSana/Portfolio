@@ -1,31 +1,75 @@
 "use client";
 
-import { StaggeredMenu, StaggeredMenuItem, StaggeredMenuSocialItem } from "./graphics/StaggeredMenu";
+import { useState } from "react";
+import styles from "./Sidebar.module.css";
+import Link from "next/link";
 
 export default function Sidebar() {
-  const links: StaggeredMenuItem[] = [
-    { label: "Home", ariaLabel: "Home section", link: "#hero" },
-    { label: "About", ariaLabel: "About section", link: "#about" },
-    { label: "Skills", ariaLabel: "Skills section", link: "#skills" },
-    { label: "Projects", ariaLabel: "Projects section", link: "#projects" },
-    { label: "Contact", ariaLabel: "Contact section", link: "#contact" },
-  ];
+  const [open, setOpen] = useState(false);
 
-  const socialItems: StaggeredMenuSocialItem[] = [
-    { label: "GitHub", link: "https://github.com/kadalisana" },
-    { label: "LinkedIn", link: "https://linkedin.com/in/kadalisana" },
+  const links = [
+    { label: "Home", href: "#hero" },
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
   ];
 
   return (
-    <StaggeredMenu
-      items={links}
-      socialItems={socialItems}
-      position="left"
-      isFixed={true}
-      logoUrl=""
-      menuButtonColor="#ffffff"
-      accentColor="#5227FF"
-      changeMenuColorOnOpen={true}
-    />
+    <>
+      {/* Toggle button — always visible */}
+      <button
+        className={styles.toggleBtn}
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label={open ? "Close menu" : "Open menu"}
+      >
+        <svg
+          className={styles.toggleIcon}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {open ? (
+            <path d="M18 6L6 18M6 6l12 12" />
+          ) : (
+            <>
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </>
+          )}
+        </svg>
+      </button>
+
+      {/* Backdrop overlay on mobile */}
+      {open && (
+        <div className={styles.backdrop} onClick={() => setOpen(false)} />
+      )}
+
+      {/* Sidebar panel */}
+      <aside className={`${styles.sidebar} ${open ? styles.sidebarOpen : ""}`}>
+        <div className={styles.logo}></div>
+        <nav className={styles.nav}>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={styles.link}
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className={styles.footer}>
+          Kadali Navneet Sai <br />
+          © {new Date().getFullYear()}
+        </div>
+      </aside>
+    </>
   );
 }
