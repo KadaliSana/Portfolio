@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
-import Background3D from "@/components/graphics/Background3D";
+import { ShootingStars } from "@/components/graphics/Background3D";
+import { StarsBackground } from "@/components/graphics/stars-background";
 import TargetCursor from '@/components/graphics/Cursor';
 import { PortfolioProvider } from "@/context/PortfolioContext";
 import ModeToggle from "@/components/ModeToggle";
@@ -32,21 +33,10 @@ export default function RootLayout({
             parallaxOn
             hoverDuration={0.2}
           />
-          <Background3D
-            speed={0.3}
-            innerLineCount={20}
-            outerLineCount={30}
-            warpIntensity={1}
-            rotation={-45}
-            edgeFadeWidth={0.1}
-            colorCycleSpeed={1}
-            brightness={0.2}
-            color1="#ffffff"
-            color2="#ffffff"
-            color3="#ffffff"
-            enableMouseInteraction
-            mouseInfluence={2}
-          />
+          <div className="fixed inset-0 z-[-1] bg-black">
+            <StarsBackground />
+            <ShootingStars />
+          </div>
           <ModeToggle />
           <Sidebar />
           {children}
