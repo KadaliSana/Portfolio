@@ -19,17 +19,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Customisation
-
-| What | Where |
-|------|-------|
-| Your name / bio | `src/components/sections/Hero.tsx`, `src/components/sections/About.tsx` |
-| Skills list | `src/components/sections/Skills.tsx` |
-| Projects | `src/components/sections/Projects.tsx` |
-| Blog posts | `src/lib/posts.ts` |
-| Social links | `src/components/Footer.tsx`, `src/components/sections/Contact.tsx` |
-| Site metadata | `src/app/layout.tsx` |
-
 ## Tech Stack
 
 - [Next.js 15](https://nextjs.org/) – App Router
