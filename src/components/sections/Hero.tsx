@@ -1,6 +1,7 @@
 "use client";
 
 import { usePortfolio } from "@/context/PortfolioContext";
+import BlurText from "@/components/graphics/BlurText";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -33,24 +34,45 @@ export default function Hero() {
       className={styles.heroSection}
     >
       <div className={styles.container}>
-          <span className={styles.badge}>
-            {content.badge}
-          </span>
+          <BlurText
+            text={content.badge}
+            delay={50}
+            className={styles.badge}
+            tag="span"
+          />
 
-          <h1 className={styles.title}>
-            {content.title}
-            <span className={styles.titleHighlight}>
-              {content.highlight}
-            </span>
-          </h1>
+          <div className={styles.titleWrapper}>
+            <BlurText
+              text={content.title}
+              delay={30}
+              animateBy="letters"
+              className={styles.title}
+              tag="h1"
+            />
+            <BlurText
+              text={content.highlight}
+              delay={30}
+              animateBy="letters"
+              className={`${styles.title} ${styles.titleHighlight}`}
+              tag="h1"
+            />
+          </div>
 
-          <p className={styles.subtitle}>
-            {content.subtitle}
-          </p>
+          <div className="w-full">
+            <BlurText
+              text={content.subtitle}
+              delay={50}
+              className={styles.subtitle}
+            />
+          </div>
 
-          <p className={styles.description}>
-            {content.description}
-          </p>
+          <div className="w-full">
+            <BlurText
+              text={content.description}
+              delay={20}
+              className={styles.description}
+            />
+          </div>
 
           <div className={styles.buttonGroup}>
             <a
@@ -67,7 +89,6 @@ export default function Hero() {
             </a>
           </div>
 
-        {/* Scroll indicator */}
         <div className={styles.scrollIndicator}>
           <svg
             className={styles.scrollIcon}

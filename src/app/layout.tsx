@@ -30,8 +30,8 @@ export default function RootLayout({
           />
           <Background3D
             speed={0.3}
-            innerLineCount={32}
-            outerLineCount={36}
+            innerLineCount={20}
+            outerLineCount={30}
             warpIntensity={1}
             rotation={-45}
             edgeFadeWidth={0.1}

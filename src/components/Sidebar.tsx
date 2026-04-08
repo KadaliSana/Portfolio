@@ -51,8 +51,7 @@ export default function Sidebar() {
 
       {/* Sidebar panel */}
       <aside className={`${styles.sidebar} ${open ? styles.sidebarOpen : ""}`}>
-        <div className={styles.logo}>NS</div>
-
+        <div className={styles.logo}></div>
         <nav className={styles.nav}>
           {links.map((link) => (
             <Link

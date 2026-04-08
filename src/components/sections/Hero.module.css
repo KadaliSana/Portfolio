@@ -16,8 +16,12 @@
   @apply inline-block bg-indigo-500/20 backdrop-blur-md text-indigo-300 text-sm font-bold uppercase tracking-widest px-5 py-2 rounded-full mb-8 border border-indigo-400/20;
 }
 
+.titleWrapper {
+  @apply flex flex-wrap items-baseline gap-x-[0.3em] mb-6;
+}
+
 .title {
-  @apply text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight;
+  @apply text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tight;
 }
 
 .titleHighlight {
