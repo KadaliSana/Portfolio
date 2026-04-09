@@ -43,17 +43,52 @@ const getRandomStartPoint = () => {
 };
 export const ShootingStars: React.FC<ShootingStarsProps> = ({
   minSpeed = 10,
-  maxSpeed = 30,
+  maxSpeed = 20,
   minDelay = 1200,
   maxDelay = 4200,
-  starColor = "#9E00FF",
+  starColor = "#efd9fc",
   trailColor = "#2EB9DF",
   starWidth = 10,
-  starHeight = 1,
+  starHeight = 5,
   className,
 }) => {
   const [star, setStar] = useState<ShootingStar | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const mousePos = useRef({ x: 0, y: 0 });
+  const currentOffset = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      mousePos.current = {
+        x: (clientX - innerWidth / 2) / 15,
+        y: (clientY - innerHeight / 2) / 15,
+      };
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const { clientX, clientY } = e.touches[0];
+        const { innerWidth, innerHeight } = window;
+        mousePos.current = {
+          x: (clientX - innerWidth / 2) / 15,
+          y: (clientY - innerHeight / 2) / 15,
+        };
+      }
+    };
+
+    window.addEventListener("touchstart", handleTouchMove);
+    window.addEventListener("touchmove", handleTouchMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
 
   useEffect(() => {
     const createStar = () => {
@@ -113,6 +148,21 @@ export const ShootingStars: React.FC<ShootingStarsProps> = ({
     const animationFrame = requestAnimationFrame(moveStar);
     return () => cancelAnimationFrame(animationFrame);
   }, [star]);
+
+  useEffect(() => {
+    const updateParallax = () => {
+      currentOffset.current.x += (mousePos.current.x - currentOffset.current.x) * 0.05;
+      currentOffset.current.y += (mousePos.current.y - currentOffset.current.y) * 0.05;
+
+      if (svgRef.current) {
+        svgRef.current.style.transform = `translate(${currentOffset.current.x}px, ${currentOffset.current.y}px)`;
+      }
+      requestAnimationFrame(updateParallax);
+    };
+
+    const parallaxFrame = requestAnimationFrame(updateParallax);
+    return () => cancelAnimationFrame(parallaxFrame);
+  }, []);
 
   return (
     <svg

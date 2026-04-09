@@ -26,15 +26,17 @@ interface StarBackgroundProps {
 }
 
 export const StarsBackground: React.FC<StarBackgroundProps> = ({
-  starDensity = 0.00015,
+  starDensity = 0.0002,
   allStarsTwinkle = true,
-  twinkleProbability = 0.7,
+  twinkleProbability = 0.8,
   minTwinkleSpeed = 0.5,
   maxTwinkleSpeed = 1,
   className,
 }) => {
   const [stars, setStars] = useState<StarProps[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mousePos = useRef({ x: 0, y: 0 });
+  const currentOffset = useRef({ x: 0, y: 0 });
 
   const generateStars = useCallback(
     (width: number, height: number): StarProps[] => {
@@ -46,7 +48,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
         return {
           x: Math.random() * width,
           y: Math.random() * height,
-          radius: Math.random() * 0.05 + 0.5,
+          radius: Math.random() + 1,
           opacity: Math.random() * 0.5 + 0.5,
           twinkleSpeed: shouldTwinkle
             ? minTwinkleSpeed +
@@ -80,12 +82,40 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
 
     updateStars();
 
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      mousePos.current = {
+        x: (clientX - innerWidth / 2) / 20,
+        y: (clientY - innerHeight / 2) / 20,
+      };
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const { clientX, clientY } = e.touches[0];
+        const { innerWidth, innerHeight } = window;
+        mousePos.current = {
+          x: (clientX - innerWidth / 2) / 20,
+          y: (clientY - innerHeight / 2) / 20,
+        };
+      }
+    };
+
+    window.addEventListener("touchstart", handleTouchMove);
+    window.addEventListener("touchmove", handleTouchMove);
+
     const resizeObserver = new ResizeObserver(updateStars);
     if (canvasRef.current) {
       resizeObserver.observe(canvasRef.current);
     }
 
     return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       if (canvasRef.current) {
         resizeObserver.unobserve(canvasRef.current);
       }
@@ -110,9 +140,18 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
 
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Lerp for smooth background movement
+      currentOffset.current.x += (mousePos.current.x - currentOffset.current.x) * 0.05;
+      currentOffset.current.y += (mousePos.current.y - currentOffset.current.y) * 0.05;
+
       stars.forEach((star) => {
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        // Shift stars by currentOffset based on their depth (simplified by using radius as depth factor)
+        const parallaxX = star.x + currentOffset.current.x * star.radius;
+        const parallaxY = star.y + currentOffset.current.y * star.radius;
+
+        ctx.arc(parallaxX, parallaxY, star.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
 
