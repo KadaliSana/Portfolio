@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { background: black; color: white; display:flex; align-items:center; justify-content:center; height: 100vh; }
+.titleHighlight {
+  font-size: 50px;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+}
+.titleHighlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, #818cf8, #c084fc);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div class="titleHighlight">
+  <span>H</span><span>e</span><span>l</span><span>l</span><span>o</span> <span>W</span><span>o</span><span>r</span><span>l</span><span>d</span>
+</div>
+</body>
+</html>

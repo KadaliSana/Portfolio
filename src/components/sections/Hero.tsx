@@ -2,6 +2,7 @@
 
 import { usePortfolio } from "@/context/PortfolioContext";
 import BlurText from "@/components/graphics/BlurText";
+import { motion } from "motion/react";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -53,7 +54,7 @@ export default function Hero() {
               text={content.highlight}
               delay={30}
               animateBy="letters"
-              className={`${styles.title} ${styles.titleHighlight}`}
+              className={styles.titleHighlight}
               tag="h1"
             />
           </div>
