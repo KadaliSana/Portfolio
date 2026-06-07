@@ -1,6 +1,3 @@
-"use client";
-
-import { usePortfolio } from "@/context/PortfolioContext";
 import styles from "./Projects.module.css";
 
 const ProProjects = [
@@ -38,51 +35,21 @@ const ProProjects = [
   }
 ];
 
-const personalProjects = [
-  {
-    title: "Custom Ortho Keyboard",
-    description:
-      "Designed and hand-wired a 40% ortholinear mechanical keyboard. Flashed custom QMK firmware and implemented custom recursive layer logic.",
-    tags: ["Hardware", "Firmware", "QMK", "Electronics"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Street Frames",
-    description:
-      "A personal digital gallery of urban street photography. Experimented with high-contrast monochrome styles and negative space compositions.",
-    tags: ["Photography", "Art", "Design"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "HomeGrid IoT",
-    description:
-      "A lightweight home automation server running on a Raspberry Pi Zero to monitor plant soil moisture and automate desk lighting using MQTT.",
-    tags: ["IoT", "Raspberry Pi", "MQTT", "Python"],
-    liveUrl: "#",
-    githubUrl: "#",
-  }
-];
-
 export default function Projects() {
-  const { mode } = usePortfolio();
-  const currentProjects = mode === "Pro" ? ProProjects : personalProjects;
-
   return (
     <section id="projects" className={styles.projectsSection}>
       <div className={styles.container}>
         <div className={styles.headerWrap}>
           <span className={styles.badge}>
-            {mode === "Pro" ? "Projects" : "Personal Work"}
+            Projects
           </span>
           <h2 className={styles.title}>
-            {mode === "Pro" ? "Things I've Built" : "Ideas & Experiments"}
+            Things I've Built
           </h2>
         </div>
 
         <div className={styles.grid}>
-          {currentProjects.map((project) => (
+          {ProProjects.map((project) => (
             <div
               key={project.title}
               className={`group ${styles.card}`}
@@ -113,7 +80,7 @@ export default function Projects() {
                   href={project.liveUrl}
                   className={`${styles.demoLink} cursor-target`}
                 >
-                  {mode === "Pro" ? "Live Demo" : "View Story"}
+                  Live Demo
                   <svg className={styles.icon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>

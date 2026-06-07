@@ -1,6 +1,3 @@
-"use client";
-
-import { usePortfolio } from "@/context/PortfolioContext";
 import styles from "./Skills.module.css";
 
 const ProSkills = [
@@ -22,44 +19,21 @@ const ProSkills = [
   },
 ];
 
-const personalInterests = [
-  {
-    category: "Creative Arts",
-    items: ["Street Photography","Cinematography", "Photo Editing"],
-  },
-  {
-    category: "Maker Hobbies",
-    items: ["3D Printing", "Soldering"],
-  },
-  {
-    category: "Strategy & Gaming",
-    items: ["Global History", "Geopolitics","Video Games"],
-  },
-  {
-    category: "Life & Health",
-    items: ["Strength Training", "Cooking"],
-  },
-];
-
-
 export default function Skills() {
-  const { mode } = usePortfolio();
-  const currentSkills = mode === "Pro" ? ProSkills : personalInterests;
-
   return (
     <section id="skills" className={styles.skillsSection}>
       <div className={styles.container}>
         <div className={styles.headerWrap}>
           <span className={styles.badge}>
-            {mode === "Pro" ? "Skills" : "Interests"}
+            Skills
           </span>
           <h2 className={styles.title}>
-            {mode === "Pro" ? "Technologies I Work With" : "Things I'm Passionate About"}
+            Technologies I Work With
           </h2>
         </div>
 
         <div className={styles.grid}>
-          {currentSkills.map((skill) => (
+          {ProSkills.map((skill) => (
             <div
               key={skill.category}
               className={styles.card}

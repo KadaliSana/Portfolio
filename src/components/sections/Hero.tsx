@@ -1,33 +1,18 @@
 "use client";
 
-import { usePortfolio } from "@/context/PortfolioContext";
 import BlurText from "@/components/graphics/BlurText";
-import { motion } from "motion/react";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
-  const { mode } = usePortfolio();
-
   const content = {
-    Pro: {
-      badge: "Welcome to my portfolio",
-      title: "Hi, I'm ",
-      highlight: "Navneet Sai Kadali",
-      subtitle: "AI engineer & Robotics developer",
-      description: "I build autonomous systems and explore machine learning technologies. Passionate about developing scalable technical solutions and leading innovative teams.",
-      primaryBtn: "View My Work",
-      secondaryBtn: "Get In Touch"
-    },
-    personal: {
-      badge: "The person behind the screen",
-      title: "I'm just ",
-      highlight: "Navneet",
-      subtitle: "Explorer, Maker & Tinkerer",
-      description: "Beyond the code, I'm passionate about exploring new technologies, DIY electronics, and understanding how the world works. Welcome to my personal creative space.",
-      primaryBtn: "See My Hobbies",
-      secondaryBtn: "Let's Connect"
-    }
-  }[mode];
+    badge: "Welcome to my portfolio",
+    title: "Hi, I'm ",
+    highlight: "Navneet Sai Kadali",
+    subtitle: "AI engineer & Robotics developer",
+    description: "I build autonomous systems and explore machine learning technologies. Passionate about developing scalable technical solutions and leading innovative teams.",
+    primaryBtn: "View My Work",
+    secondaryBtn: "Get In Touch"
+  };
 
   return (
     <section

@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import { ShootingStars } from "@/components/graphics/Background3D";
 import { StarsBackground } from "@/components/graphics/stars-background";
 import TargetCursor from '@/components/graphics/Cursor';
-import { PortfolioProvider } from "@/context/PortfolioContext";
-import ModeToggle from "@/components/ModeToggle";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
@@ -25,23 +23,20 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("h-full antialiased scroll-smooth", "font-sans", geist.variable)}>
       <body className="min-h-full flex flex-col">
-        <PortfolioProvider>
-          <TargetCursor 
-            targetSelector="a, button, .cursor-target"
-            spinDuration={2}
-            hideDefaultCursor
-            parallaxOn
-            hoverDuration={0.2}
-          />
-          <div className="fixed inset-0 z-[-1] bg-black">
-            <StarsBackground />
-            <ShootingStars />
-          </div>
-          <ModeToggle />
-          <Sidebar />
-          {children}
-          <Footer />
-        </PortfolioProvider>
+        <TargetCursor 
+          targetSelector="a, button, .cursor-target"
+          spinDuration={2}
+          hideDefaultCursor
+          parallaxOn
+          hoverDuration={0.2}
+        />
+        <div className="fixed inset-0 z-[-1] bg-black">
+          <StarsBackground />
+          <ShootingStars />
+        </div>
+        <Sidebar />
+        {children}
+        <Footer />
       </body>
     </html>
   );
